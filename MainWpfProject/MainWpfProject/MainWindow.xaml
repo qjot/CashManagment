@@ -6,12 +6,12 @@
         xmlns:tools="clr-namespace:MainWpfProject.Tools"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         mc:Ignorable="d ignore"
-         Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={tools:RatioConverter}, ConverterParameter='0.4' }" 
-         Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={tools:RatioConverter}, ConverterParameter='0.4' }" 
+         Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={tools:RatioConverter}, ConverterParameter='1' }" 
+         Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={tools:RatioConverter}, ConverterParameter='1' }" 
          WindowStartupLocation="CenterScreen"
         Title="Cash Managment"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
-    
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -21,14 +21,36 @@
     </Window.Resources>
 
     <Grid x:Name="LayoutRoot">
-
-        <TextBlock FontSize="36"
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="749" />
+            <!-- Or Auto -->
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Canvas Grid.Column="0"  Margin="0,0,10,0">
+            <TextBlock FontSize="36"
                    FontWeight="Bold"
                    Foreground="Purple"
                    Text="{Binding WelcomeTitle}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
-                   TextWrapping="Wrap" />
+                   TextWrapping="Wrap" Width="564" RenderTransformOrigin="0.496,0.509" Height="103" Canvas.Left="99" Canvas.Top="116" />
+           
+        </Canvas>
+        <Canvas Grid.Column="1" >
+            <Button x:Name="login"  Content="Login" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Width="136" Height="54" Canvas.Left="111" Canvas.Top="375">
+            </Button>
+            <AdornerDecorator/>
+            <TextBox x:Name="textBox_Copy" Height="46" Canvas.Left="81" TextWrapping="Wrap" Canvas.Top="272" Width="185">
+                <tools:WatermarkService.Watermark>
+                    <TextBlock>E-mail or login</TextBlock>
+                </tools:WatermarkService.Watermark>
+            </TextBox>
+            <TextBox x:Name="textBox" Height="46" TextWrapping="Wrap" Width="185" RenderTransformOrigin="0.776,1.496" Canvas.Left="81" Canvas.Top="192">
+                <tools:WatermarkService.Watermark>
+                    <TextBlock><Run Text="Password"/></TextBlock>
+                </tools:WatermarkService.Watermark>
+            </TextBox>
+        </Canvas>
 
     </Grid>
 </Window>
