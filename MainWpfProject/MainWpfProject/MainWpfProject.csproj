@@ -93,9 +93,13 @@
     <Compile Include="Model\DataService.cs" />
     <Compile Include="Model\IDataService.cs" />
     <Compile Include="Model\person.cs" />
+    <Compile Include="Navigation\FrameNavigationService .cs" />
+    <Compile Include="Navigation\IFrameNavigationService.cs" />
     <Compile Include="Tools\RatioConvertercs.cs" />
     <Compile Include="Tools\WatermarkAdorner.cs" />
     <Compile Include="Tools\WaterMarkService.cs" />
+    <Compile Include="ViewModel\ApplicationViewModel.cs" />
+    <Compile Include="ViewModel\IPageViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
