@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MainWpfProject.Navigation
 {
-    interface IFrameNavigationService : INavigationService
+    public interface IFrameNavigationService : INavigationService
     {
         object Parameter { get; }
     }

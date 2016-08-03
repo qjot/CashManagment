@@ -12,24 +12,24 @@ namespace MainWpfProject.Model
         {
         }
 
-        public virtual DbSet<account> account { get; set; }
-        public virtual DbSet<person> person { get; set; }
+        public virtual DbSet<Account> account { get; set; }
+        public virtual DbSet<Person> person { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<person>()
+            modelBuilder.Entity<Person>()
                 .Property(e => e.name)
                 .IsFixedLength();
 
-            modelBuilder.Entity<person>()
+            modelBuilder.Entity<Person>()
                 .Property(e => e.surname)
                 .IsFixedLength();
 
-            modelBuilder.Entity<person>()
+            modelBuilder.Entity<Person>()
                 .Property(e => e.email)
                 .IsFixedLength();
 
-            modelBuilder.Entity<person>()
+            modelBuilder.Entity<Person>()
                 .Property(e => e.password)
                 .IsFixedLength();
         }

@@ -1,5 +1,8 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using MainWpfProject.Model;
+using MainWpfProject.Navigation;
 
 namespace MainWpfProject.ViewModel
 {
@@ -12,13 +15,12 @@ namespace MainWpfProject.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private readonly IDataService _dataService;
+        private FrameNavigationService _navigationService;
 
-        /// <summary>
-        /// The <see cref="WelcomeTitle" /> property's name.
-        /// </summary>
-        public const string WelcomeTitlePropertyName = "WelcomeTitle";
+        public RelayCommand<Person> LoginCommand {get; private set;}
 
         private string _welcomeTitle = string.Empty;
+        private string _loginMessage = string.Empty;
 
         /// <summary>
         /// Gets the WelcomeTitle property.
@@ -36,10 +38,22 @@ namespace MainWpfProject.ViewModel
             }
         }
 
+        public string loginMessage
+        {
+            get
+            {
+                return _loginMessage;
+            }
+            set
+            {
+                Set(ref _loginMessage, value);
+            }
+        }
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel(IDataService dataService)
+        public MainViewModel(IDataService dataService, IFrameNavigationService navigationService)
         {
             _dataService = dataService;
             _dataService.GetData(
@@ -53,6 +67,15 @@ namespace MainWpfProject.ViewModel
 
                     WelcomeTitle = item.Title;
                 });
+            LoginCommand = new RelayCommand<Person>(VerifyLoginAndLogin);
+        }
+
+        private void VerifyLoginAndLogin(Person obj)
+        {
+            loginMessage = "Login Atempt";
+            _navigationService = FrameNavigationService.navigationInstance;
+            _navigationService.NavigateTo("Account");
+            //throw new NotImplementedException();
         }
 
         ////public override void Cleanup()

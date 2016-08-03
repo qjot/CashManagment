@@ -11,11 +11,28 @@ using System.Windows.Media;
 
 namespace MainWpfProject.Navigation
 {
-    class FrameNavigationService : IFrameNavigationService, INotifyPropertyChanged
+    public class FrameNavigationService : IFrameNavigationService, INotifyPropertyChanged
     {
+        
+            private static FrameNavigationService _navigationInstance;
+
+            private FrameNavigationService() { }
+
+            public static FrameNavigationService navigationInstance
+            {
+                get
+                {
+                    if (_navigationInstance == null)
+                    {
+                    _navigationInstance = new FrameNavigationService();
+                    }
+                    return _navigationInstance;
+                }
+            }
+        
         #region Fields
-        private readonly Dictionary<string, Uri> _pagesByKey;
-        private readonly List<string> _historic;
+        private readonly Dictionary<string, Uri> _pagesByKey = new Dictionary<string, Uri>();
+        private readonly List<string> _historic = new List<string>();
         private string _currentPageKey;
         #endregion
 
@@ -39,11 +56,7 @@ namespace MainWpfProject.Navigation
         public object Parameter { get; private set; }
         #endregion
         #region Ctors and Methods
-        public FrameNavigationService()
-        {
-            _pagesByKey = new Dictionary<string, Uri>();
-            _historic = new List<string>();
-        }
+     
         public void GoBack()
         {
             if (_historic.Count > 1)

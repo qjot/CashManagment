@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:tools="clr-namespace:MainWpfProject.Tools"
         xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:local="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
         mc:Ignorable="d ignore"
-         Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={tools:RatioConverter}, ConverterParameter='1' }" 
-         Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={tools:RatioConverter}, ConverterParameter='1' }" 
+         Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={tools:RatioConverter}, ConverterParameter='0.9' }" 
+         Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, Converter={tools:RatioConverter}, ConverterParameter='0.9' }" 
          WindowStartupLocation="CenterScreen"
         Title="Cash Managment"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
@@ -20,12 +21,14 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid x:Name="LayoutRoot">
+    <Grid x:Name="layoutRoot">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="749" />
             <!-- Or Auto -->
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
+        <local:Frame x:Name="MainFrame">
+        
         <Canvas Grid.Column="0"  Margin="0,0,10,0">
             <TextBlock FontSize="36"
                    FontWeight="Bold"
@@ -34,10 +37,13 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    TextWrapping="Wrap" Width="564" RenderTransformOrigin="0.496,0.509" Height="103" Canvas.Left="99" Canvas.Top="116" />
-           
+
         </Canvas>
         <Canvas Grid.Column="1" >
-            <Button x:Name="login"  Content="Login" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Width="136" Height="54" Canvas.Left="111" Canvas.Top="375">
+            <Button x:Name="login"  Content="Login" FontSize="15" VerticalAlignment="Center" 
+                    HorizontalAlignment="Stretch"  Width="136" Height="54" Canvas.Left="111" 
+                    Canvas.Top="375"
+                    Command="{Binding LoginCommand}">
             </Button>
             <AdornerDecorator/>
             <TextBox x:Name="textBox_Copy" Height="46" Canvas.Left="81" TextWrapping="Wrap" Canvas.Top="272" Width="185">
@@ -50,7 +56,9 @@
                     <TextBlock><Run Text="Password"/></TextBlock>
                 </tools:WatermarkService.Watermark>
             </TextBox>
-        </Canvas>
+            <Label x:Name="label1" Content="{Binding loginMessage}" Canvas.Left="81" Canvas.Top="519" Width="168"/>
 
+        </Canvas>
+        </local:Frame>
     </Grid>
 </Window>

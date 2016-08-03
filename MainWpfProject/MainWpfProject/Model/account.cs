@@ -7,7 +7,7 @@ namespace MainWpfProject.Model
     using System.Data.Entity.Spatial;
 
     [Table("account")]
-    public partial class account
+    public partial class Account
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

@@ -13,6 +13,8 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using MainWpfProject.Model;
+using MainWpfProject.Navigation;
+using System;
 
 namespace MainWpfProject.ViewModel
 {
@@ -37,8 +39,16 @@ namespace MainWpfProject.ViewModel
             {
                 SimpleIoc.Default.Register<IDataService, DataService>();
             }
-
+            SetupNavigation();
             SimpleIoc.Default.Register<MainViewModel>();
+        }
+        private static void SetupNavigation()
+        {
+            var navigationService = FrameNavigationService.navigationInstance;
+            navigationService.Configure("Account", new Uri("../Views/AccountMainView.xaml", UriKind.Relative));
+           // navigationService.Configure("Notes", new Uri("../Views/NotesView.xaml", UriKind.Relative));
+
+            SimpleIoc.Default.Register<IFrameNavigationService>(() => navigationService);
         }
 
         /// <summary>
